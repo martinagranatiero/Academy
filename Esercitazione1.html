@@ -1,0 +1,103 @@
+<html>
+    <head>
+        <title>Esercitazione 1</title>
+    </head>
+    <body>
+        <h1>Form contatti</h1>
+
+        <form name="modulo">
+            <label for="cognome">Cognome:</label><br>
+            <input type="text" id="cognome" size="40" placeholder="Cognome" required><br><br>
+            
+            <label for="nome">Nome:</label><br>
+            <input type="text" id="nome" size="30" placeholder="Nome" required><br><br>
+
+            <label for="matricola">Matricola:</label><br>
+            <input type="text" id="matricola" size="12" placeholder="Matricola" required><br><br>
+
+            <label for="regione">Regione di residenza:</label><br>
+            <select name="regione" required>
+                <option value="" selected>-- Scegli una regione--</option>
+                <option value="Abruzzo">Abruzzo</option>
+                <option value="Basilicata">Basilicata</option>
+                <option value="Calabria">Calabria</option>
+                <option value="Campania">Campania</option>
+                <option value="Emilia-Romagna">Emilia-Romagna</option>
+                <option value="Friuli Venezia Giulia">Friuli Venezia Giulia</option>
+                <option value="Lazio">Lazio</option>
+                <option value="Liguria">Liguria</option>
+                <option value="Lombardia">Lombardia</option>
+                <option value="Marche">Marche</option>
+                <option value="Molise">Molise</option>
+                <option value="Piemonte">Piemonte</option>
+                <option value="Puglia">Puglia</option>
+                <option value="Sardegna">Sardegna</option>
+                <option value="Sicilia">Sicilia</option>
+                <option value="Toscana">Toscana</option>
+                <option value="Trentino-Alto Adige">Trentino-Alto Adige</option>
+                <option value="Umbria">Umbria</option>
+                <option value="Valle d'Aosta">Valle d'Aosta</option>
+                <option value="Veneto">Veneto</option>
+            </select><br><br>
+
+            <label for="email">E-mail:</label><br>
+            <input type="email" id="email" size="30" placeholder="E-mail"><br><br>
+
+            <label for="telefono">Telefono:</label><br>
+            <input type="tel" id="telefono" size="15" placeholder="Telefono"><br><br>
+
+            <label for="richieste">Richieste particolari:</label><br>
+            <textarea id="richieste" placeholder="Richieste particolari" rows="12" cols="60"></textarea><br><br>
+
+            <input type="button" value="INVIO" id="invio">
+            <input type="submit" value="Submit (HTML)">
+            <input type="reset" value="Reset">
+        </form>
+
+        <script>
+            function validazione() {
+                let doc = document.modulo;
+                let cognome = doc.cognome.value;
+                let nome = doc.nome.value;
+                let matricola = doc.matricola.value;
+                let regione = doc.regione.value;
+                let email = doc.email.value;
+                let telefono = doc.telefono.value;
+                let richieste = doc.richieste.value;
+
+                let email_reg_exp = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-]{2,})+.)+([a-zA-Z0-9]{2,})+$/;
+                let matricola_reg_exp = /^[0-9]+$/;
+            
+                if (nome == "") {
+                    alert ("Campo nome obbligatorio! Si prega di compilarlo.");
+                }
+                
+                if (cognome == "") {
+                    alert ("Campo cognome obbligatorio! Si prega di compilarlo.");
+                } 
+                
+                if (matricola == "") {
+                    alert ("Campo matricola obbligatorio! Si prega di compilarlo.");
+                } else if (!matricola_reg_exp.test(matricola)) {
+                    alert ("Matricola non valida. Si prega di inserire una matricola valida.");
+                    doc.matricola.select();
+                }
+                
+                if (regione == "") {
+                    alert ("Campo regione obbligatorio! Si prega di compilarlo.");
+                }
+
+                if (email == "" && telefono == "") {
+                    alert ("Si prega di inserire o l'e-mail o il numero di telefono.");
+                } else if (email != "") {
+                    if (!email_reg_exp.test(email)) {
+                        alert ("Indirizzo e-mail non valido. Si prega di inserire un indirizzo e-mail corretto.")
+                        doc.email.select();
+                    }
+                }
+            }
+
+            document.getElementById("invio").addEventListener("click", validazione.bind(null));
+        </script>
+    </body>
+</html>
